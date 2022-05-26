@@ -37,6 +37,8 @@ import org.apache.hadoop.hive.common.io.SortAndDigestPrintStream;
 import org.apache.hadoop.hive.common.io.SortPrintStream;
 import org.apache.hadoop.hive.ql.session.SessionState;
 import org.apache.hive.common.util.StreamPrinter;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * QTestResultProcessor: handles file-level q test result post-processing: sort, diff (similar to
@@ -109,7 +111,12 @@ public class QTestResultProcessor {
     return !operations.contains(Operation.NEW_SESSION);
   }
 
+  private static final Logger LOG = LoggerFactory.getLogger(QTestResultProcessor.class);
+
   public QTestProcessExecResult executeDiffCommand(String inFileName, String outFileName, boolean ignoreWhiteSpace) throws Exception {
+
+    LOG.info("inFile is " + inFileName);
+    LOG.info("outFile is " + outFileName);
 
     QTestProcessExecResult result;
 
